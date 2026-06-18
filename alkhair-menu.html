@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الخير - أكل بيتي عراقي أصيل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark:   #1C0F08;
+    --cocoa:  #4A2410;
+    --coffee: #8B4513;
+    --latte:  #D4A98A;
+    --cream:  #FAF5F0;
+    --white:  #FFFFFF;
+    --shadow: 0 4px 20px rgba(28,15,8,0.12);
+    --radius: 16px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+    padding-bottom: 90px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(160deg, var(--dark) 0%, var(--cocoa) 60%, var(--coffee) 100%);
+    color: var(--cream);
+    padding: 48px 20px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A98A' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+  .hero-logo {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, var(--latte), var(--coffee));
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--cream);
+    position: relative;
+  }
+  .hero h1 span { color: var(--latte); }
+  .hero p {
+    font-size: 1rem;
+    color: var(--latte);
+    margin: 8px 0 24px;
+    position: relative;
+    font-weight: 400;
+  }
+  .hero-btns {
+    display: flex; gap: 12px; justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .btn-wa {
+    background: #25D366;
+    color: white;
+    border: none; border-radius: 50px;
+    padding: 12px 24px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-wa:active { transform: scale(0.96); }
+  .btn-call {
+    background: transparent;
+    color: var(--latte);
+    border: 2px solid var(--latte);
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-call:active { background: var(--latte); color: var(--dark); }
+
+  /* ===== TABS ===== */
+  .tabs-wrap {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--dark);
+    box-shadow: 0 2px 12px rgba(28,15,8,0.25);
+  }
+  .tabs {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 0;
+    padding: 0 8px;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 0 0 auto;
+    background: transparent;
+    border: none;
+    color: var(--latte);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 14px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    scroll-snap-align: start;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    opacity: 0.65;
+  }
+  .tab-btn.active {
+    color: var(--latte);
+    border-bottom-color: var(--coffee);
+    opacity: 1;
+  }
+
+  /* ===== SECTION ===== */
+  .section { display: none; padding: 20px 16px; }
+  .section.active { display: block; }
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--cocoa);
+    margin-bottom: 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-note {
+    font-size: 0.8rem;
+    color: var(--coffee);
+    background: rgba(139,69,19,0.08);
+    border-right: 3px solid var(--coffee);
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  /* ===== CARDS ===== */
+  .cards { display: flex; flex-direction: column; gap: 14px; }
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    border: 1px solid rgba(212,169,138,0.2);
+    transition: transform 0.15s;
+  }
+  .card:active { transform: scale(0.99); }
+
+  /* Placeholder image area */
+  .card-img {
+    width: 110px;
+    min-height: 110px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--cocoa) 0%, var(--coffee) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    position: absolute; inset: 0;
+    display: none; /* shown when src is set */
+  }
+  .card-img .img-icon { font-size: 28px; z-index: 1; }
+  .card-img .img-label {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    z-index: 1;
+    padding: 0 4px;
+  }
+
+  .card-body {
+    flex: 1;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .card-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.3;
+  }
+  .card-desc {
+    font-size: 0.75rem;
+    color: var(--coffee);
+    line-height: 1.5;
+  }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+  .card-price {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--cocoa);
+  }
+  .card-price span { font-size: 0.7rem; font-weight: 500; }
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--cream);
+    border-radius: 30px;
+    padding: 4px 10px;
+    border: 1.5px solid var(--latte);
+  }
+  .qty-btn {
+    width: 26px; height: 26px;
+    border: none;
+    background: var(--coffee);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, transform 0.1s;
+    font-family: 'Cairo', sans-serif;
+  }
+  .qty-btn:active { transform: scale(0.88); background: var(--cocoa); }
+  .qty-btn.add-btn { background: var(--coffee); }
+  .qty-num {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--dark);
+    min-width: 18px;
+    text-align: center;
+  }
+
+  /* Add animation */
+  @keyframes pop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.18); }
+    100% { transform: scale(1); }
+  }
+  .card.added { animation: pop 0.3s ease; }
+
+  /* ===== CART BAR ===== */
+  #cart-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--dark);
+    color: var(--cream);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 200;
+    box-shadow: 0 -4px 20px rgba(28,15,8,0.3);
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  #cart-bar.visible { transform: translateY(0); }
+  .cart-info { display: flex; flex-direction: column; }
+  .cart-count { font-size: 0.75rem; color: var(--latte); }
+  .cart-total { font-size: 1.1rem; font-weight: 800; }
+  .btn-order {
+    background: linear-gradient(135deg, var(--coffee), var(--cocoa));
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 24px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(139,69,19,0.4);
+    transition: transform 0.15s;
+  }
+  .btn-order:active { transform: scale(0.95); }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(28,15,8,0.65);
+    backdrop-filter: blur(3px);
+    align-items: flex-end; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--cream);
+    border-radius: 28px 28px 0 0;
+    padding: 28px 20px 32px;
+    width: 100%; max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cocoa);
+    margin-bottom: 6px;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--latte);
+    border-radius: 12px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.95rem;
+    color: var(--dark);
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input:focus, .field textarea:focus { border-color: var(--coffee); }
+  .field textarea { height: 80px; resize: none; }
+  .order-summary {
+    background: white;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 20px;
+    max-height: 180px;
+    overflow-y: auto;
+    border: 1px solid rgba(212,169,138,0.3);
+  }
+  .order-summary h3 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--coffee);
+    margin-bottom: 10px;
+  }
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    padding: 5px 0;
+    border-bottom: 1px dashed rgba(212,169,138,0.3);
+    color: var(--dark);
+  }
+  .summary-item:last-child { border: none; }
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--cocoa);
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 2px solid var(--latte);
+  }
+  .btn-send {
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+    margin-bottom: 12px;
+  }
+  .btn-cancel {
+    width: 100%;
+    background: transparent;
+    color: var(--coffee);
+    border: 1.5px solid var(--latte);
+    border-radius: 14px;
+    padding: 14px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* ===== NOTICE ===== */
+  .notice {
+    background: linear-gradient(135deg, rgba(74,36,16,0.07), rgba(139,69,19,0.07));
+    border: 1.5px solid rgba(212,169,138,0.4);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin: 20px 16px;
+    font-size: 0.82rem;
+    color: var(--cocoa);
+    line-height: 1.7;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .notice-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">🍽️</div>
+  <h1><span>الخير</span></h1>
+  <p>أكل بيتي عراقي أصيل</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/9647829962799" class="btn-wa" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      تواصل معنا
+    </a>
+    <a href="tel:07829962799" class="btn-call">
+      📞 07829962799
+    </a>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs" id="tabs">
+    <button class="tab-btn active" onclick="showSection(0,this)">🍃 ورق العنب</button>
+    <button class="tab-btn" onclick="showSection(1,this)">🍲 الدولمة</button>
+    <button class="tab-btn" onclick="showSection(2,this)">🍛 القسم الشرقي</button>
+    <button class="tab-btn" onclick="showSection(3,this)">🥠 الفتة والمقبلات</button>
+    <button class="tab-btn" onclick="showSection(4,this)">🥟 المعجنات</button>
+    <button class="tab-btn" onclick="showSection(5,this)">🍟 المقليات</button>
+    <button class="tab-btn" onclick="showSection(6,this)">🧊 الكبة المجمدة</button>
+    <button class="tab-btn" onclick="showSection(7,this)">🍝 أطباق أخرى</button>
+  </div>
+</div>
+
+<!-- SECTIONS -->
+
+<!-- 0: ورق العنب -->
+<div class="section active" id="sec-0">
+  <div class="section-title">🍃 ورق العنب</div>
+  <div class="cards">
+    <div class="card" id="item-0">
+      <div class="card-img"><div class="img-icon">🍃</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">ورق عنب صغير (10 حبات)</div>
+        <div class="card-desc">محشوة برز ولحم بتوابل بيتية</div>
+        <div class="card-footer">
+          <div class="card-price">5,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-0',-1)">−</button>
+            <span class="qty-num" id="qty-item-0">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-0',1,5000,'ورق عنب صغير (10 حبات)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-1">
+      <div class="card-img"><div class="img-icon">🍃</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">ورق عنب وسط (20 حبة)</div>
+        <div class="card-desc">محشوة برز ولحم بتوابل بيتية</div>
+        <div class="card-footer">
+          <div class="card-price">9,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-1',-1)">−</button>
+            <span class="qty-num" id="qty-item-1">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-1',1,9000,'ورق عنب وسط (20 حبة)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-2">
+      <div class="card-img"><div class="img-icon">🍃</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">ورق عنب كبير (40 حبة)</div>
+        <div class="card-desc">محشوة برز ولحم بتوابل بيتية</div>
+        <div class="card-footer">
+          <div class="card-price">17,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-2',-1)">−</button>
+            <span class="qty-num" id="qty-item-2">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-2',1,17000,'ورق عنب كبير (40 حبة)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-3">
+      <div class="card-img"><div class="img-icon">🍃</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">صينية ورق عنب (50 حبة)</div>
+        <div class="card-desc">مناسبة للتجمعات والعائلات</div>
+        <div class="card-footer">
+          <div class="card-price">22,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-3',-1)">−</button>
+            <span class="qty-num" id="qty-item-3">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-3',1,22000,'صينية ورق عنب (50 حبة)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-4">
+      <div class="card-img"><div class="img-icon">🍃</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">صينية ورق عنب (100 حبة)</div>
+        <div class="card-desc">للمناسبات والضيافة الكبيرة</div>
+        <div class="card-footer">
+          <div class="card-price">43,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-4',-1)">−</button>
+            <span class="qty-num" id="qty-item-4">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-4',1,43000,'صينية ورق عنب (100 حبة)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-5">
+      <div class="card-img"><div class="img-icon">🍃</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">صواني ورق عنب الضيافة</div>
+        <div class="card-desc">معدّة خصيصاً لاستقبال الضيوف</div>
+        <div class="card-footer">
+          <div class="card-price">25,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-5',-1)">−</button>
+            <span class="qty-num" id="qty-item-5">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-5',1,25000,'صواني ورق عنب الضيافة')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 1: الدولمة -->
+<div class="section" id="sec-1">
+  <div class="section-title">🍲 الدولمة والمحاشي</div>
+  <div class="cards">
+    <div class="card" id="item-10">
+      <div class="card-img"><div class="img-icon">🍲</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">دولمة صغير (شخص واحد)</div>
+        <div class="card-desc">دولمة بيتية بالخضار والرز واللحم</div>
+        <div class="card-footer">
+          <div class="card-price">8,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-10',-1)">−</button>
+            <span class="qty-num" id="qty-item-10">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-10',1,8000,'دولمة صغير (شخص واحد)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-11">
+      <div class="card-img"><div class="img-icon">🍲</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">جدر دولمة وسط (3 أشخاص)</div>
+        <div class="card-desc">جدر دولمة عراقية كاملة</div>
+        <div class="card-footer">
+          <div class="card-price">18,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-11',-1)">−</button>
+            <span class="qty-num" id="qty-item-11">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-11',1,18000,'جدر دولمة وسط (3 أشخاص)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-12">
+      <div class="card-img"><div class="img-icon">🍲</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">جدر دولمة كبير (6 أشخاص)</div>
+        <div class="card-desc">جدر دولمة كبير للعائلة</div>
+        <div class="card-footer">
+          <div class="card-price">32,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-12',-1)">−</button>
+            <span class="qty-num" id="qty-item-12">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-12',1,32000,'جدر دولمة كبير (6 أشخاص)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-13">
+      <div class="card-img"><div class="img-icon">🍲</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">جدر دولمة ضلوع (5 أشخاص)</div>
+        <div class="card-desc">دولمة بالضلوع اللذيذة</div>
+        <div class="card-footer">
+          <div class="card-price">36,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-13',-1)">−</button>
+            <span class="qty-num" id="qty-item-13">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-13',1,36000,'جدر دولمة ضلوع (5 أشخاص)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-14">
+      <div class="card-img"><div class="img-icon">🍲</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">مكس محاشي وسط</div>
+        <div class="card-desc">تشكيلة محاشي متنوعة</div>
+        <div class="card-footer">
+          <div class="card-price">9,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-14',-1)">−</button>
+            <span class="qty-num" id="qty-item-14">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-14',1,9000,'مكس محاشي وسط')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-15">
+      <div class="card-img"><div class="img-icon">🍲</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">مكس محاشي كبير</div>
+        <div class="card-desc">تشكيلة محاشي كبيرة متنوعة</div>
+        <div class="card-footer">
+          <div class="card-price">17,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-15',-1)">−</button>
+            <span class="qty-num" id="qty-item-15">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-15',1,17000,'مكس محاشي كبير')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2: القسم الشرقي -->
+<div class="section" id="sec-2">
+  <div class="section-title">🍛 القسم الشرقي</div>
+  <div class="section-note">جميع الأطباق تقدم مع اللبن والمرق</div>
+  <div class="cards">
+    <div class="card" id="item-20">
+      <div class="card-img"><div class="img-icon">🍛</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">صينية دجاجة مع تمن البرياني</div>
+        <div class="card-desc">دجاجة محشية أو عادية مع تمن برياني</div>
+        <div class="card-footer">
+          <div class="card-price">25,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-20',-1)">−</button>
+            <span class="qty-num" id="qty-item-20">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-20',1,25000,'صينية دجاجة مع تمن البرياني')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-21">
+      <div class="card-img"><div class="img-icon">🍛</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">نصف دجاجة مع تمن البرياني</div>
+        <div class="card-desc">نصف دجاجة مع تمن برياني</div>
+        <div class="card-footer">
+          <div class="card-price">13,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-21',-1)">−</button>
+            <span class="qty-num" id="qty-item-21">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-21',1,13000,'نصف دجاجة مع تمن البرياني')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-22">
+      <div class="card-img"><div class="img-icon">🍛</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">برياني بوكس (شخص واحد)</div>
+        <div class="card-desc">برياني بالدجاج لشخص واحد</div>
+        <div class="card-footer">
+          <div class="card-price">6,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-22',-1)">−</button>
+            <span class="qty-num" id="qty-item-22">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-22',1,6000,'برياني بوكس (شخص واحد)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-23">
+      <div class="card-img"><div class="img-icon">🍛</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">برياني بوكس (شخصين)</div>
+        <div class="card-desc">برياني بالدجاج لشخصين</div>
+        <div class="card-footer">
+          <div class="card-price">11,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-23',-1)">−</button>
+            <span class="qty-num" id="qty-item-23">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-23',1,11000,'برياني بوكس (شخصين)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-24">
+      <div class="card-img"><div class="img-icon">🍛</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">صينية برياني (4-5 أشخاص)</div>
+        <div class="card-desc">صينية برياني للعائلة الصغيرة</div>
+        <div class="card-footer">
+          <div class="card-price">20,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-24',-1)">−</button>
+            <span class="qty-num" id="qty-item-24">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-24',1,20000,'صينية برياني (4-5 أشخاص)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-25">
+      <div class="card-img"><div class="img-icon">🍛</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">صينية برياني (5-9 أشخاص)</div>
+        <div class="card-desc">صينية برياني للعائلة الكبيرة</div>
+        <div class="card-footer">
+          <div class="card-price">40,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-25',-1)">−</button>
+            <span class="qty-num" id="qty-item-25">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-25',1,40000,'صينية برياني (5-9 أشخاص)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-26">
+      <div class="card-img"><div class="img-icon">🍲</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">جدر مقلوبة دجاج (3 أشخاص)</div>
+        <div class="card-desc">مقلوبة دجاج بيتية شهية</div>
+        <div class="card-footer">
+          <div class="card-price">20,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-26',-1)">−</button>
+            <span class="qty-num" id="qty-item-26">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-26',1,20000,'جدر مقلوبة دجاج (3 أشخاص)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-27">
+      <div class="card-img"><div class="img-icon">🍲</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">جدر مقلوبة لحم (3 أشخاص)</div>
+        <div class="card-desc">مقلوبة لحم بيتية شهية</div>
+        <div class="card-footer">
+          <div class="card-price">32,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-27',-1)">−</button>
+            <span class="qty-num" id="qty-item-27">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-27',1,32000,'جدر مقلوبة لحم (3 أشخاص)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-28">
+      <div class="card-img"><div class="img-icon">🍲</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">تاجينة بوكس (شخص واحد)</div>
+        <div class="card-desc">تاجينة شهية لشخص واحد</div>
+        <div class="card-footer">
+          <div class="card-price">8,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-28',-1)">−</button>
+            <span class="qty-num" id="qty-item-28">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-28',1,8000,'تاجينة بوكس (شخص واحد)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-29">
+      <div class="card-img"><div class="img-icon">🍲</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">تاجينة صينية (3 أشخاص)</div>
+        <div class="card-desc">صينية تاجينة للعائلة</div>
+        <div class="card-footer">
+          <div class="card-price">24,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-29',-1)">−</button>
+            <span class="qty-num" id="qty-item-29">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-29',1,24000,'تاجينة صينية (3 أشخاص)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3: الفتة والمقبلات -->
+<div class="section" id="sec-3">
+  <div class="section-title">🥠 الفتة والمقبلات</div>
+  <div class="cards">
+    <div class="card" id="item-30">
+      <div class="card-img"><div class="img-icon">🥠</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">فتة ورق عنب</div>
+        <div class="card-desc">فتة لذيذة مع ورق العنب</div>
+        <div class="card-footer">
+          <div class="card-price">7,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-30',-1)">−</button>
+            <span class="qty-num" id="qty-item-30">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-30',1,7000,'فتة ورق عنب')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-31">
+      <div class="card-img"><div class="img-icon">🥠</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">فتة باذنجان</div>
+        <div class="card-desc">فتة مع باذنجان مقلي</div>
+        <div class="card-footer">
+          <div class="card-price">7,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-31',-1)">−</button>
+            <span class="qty-num" id="qty-item-31">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-31',1,7000,'فتة باذنجان')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-32">
+      <div class="card-img"><div class="img-icon">🥠</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">فتة مسخن دجاج</div>
+        <div class="card-desc">فتة مع دجاج مسخن بالبصل</div>
+        <div class="card-footer">
+          <div class="card-price">8,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-32',-1)">−</button>
+            <span class="qty-num" id="qty-item-32">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-32',1,8000,'فتة مسخن دجاج')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-33">
+      <div class="card-img"><div class="img-icon">🥠</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">فتة كبة برغل شامية</div>
+        <div class="card-desc">فتة مع كبة برغل شامية</div>
+        <div class="card-footer">
+          <div class="card-price">9,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-33',-1)">−</button>
+            <span class="qty-num" id="qty-item-33">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-33',1,9000,'فتة كبة برغل شامية')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-34">
+      <div class="card-img"><div class="img-icon">🥗</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">مقبلات (حمص / تبولة / سلطة)</div>
+        <div class="card-desc">حمص، تبولة، سلطة معكرونة، أو سلطة روسية</div>
+        <div class="card-footer">
+          <div class="card-price">2,000 <span>د.ع / طبق</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-34',-1)">−</button>
+            <span class="qty-num" id="qty-item-34">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-34',1,2000,'مقبلات (طبق)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4: المعجنات -->
+<div class="section" id="sec-4">
+  <div class="section-title">🥟 المعجنات</div>
+  <div class="section-note">أقل عدد للطلب 5 قطع من النوع الواحد — سعر الـ 5 قطع 5,000 د.ع</div>
+  <div class="cards">
+    <div class="card" id="item-40">
+      <div class="card-img"><div class="img-icon">🥟</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">معجنات (5 قطع)</div>
+        <div class="card-desc">لحم بعجين، فاهيتا دجاج، صفيحة لحم، صفيحة جبن عكاوي، أو ميني بيتزا</div>
+        <div class="card-footer">
+          <div class="card-price">5,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-40',-1)">−</button>
+            <span class="qty-num" id="qty-item-40">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-40',1,5000,'معجنات (5 قطع)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-41">
+      <div class="card-img"><div class="img-icon">🥟</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">صينية معجنات مشكلة (25 قطعة)</div>
+        <div class="card-desc">تشكيلة متنوعة من المعجنات</div>
+        <div class="card-footer">
+          <div class="card-price">25,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-41',-1)">−</button>
+            <span class="qty-num" id="qty-item-41">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-41',1,25000,'صينية معجنات مشكلة (25 قطعة)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5: المقليات -->
+<div class="section" id="sec-5">
+  <div class="section-title">🍟 المقليات والمفرزنات</div>
+  <div class="section-note">تقدم حارة أو مجمدة حسب الطلب — أقل عدد 8 قطع</div>
+  <div class="cards">
+    <div class="card" id="item-50">
+      <div class="card-img"><div class="img-icon">🥐</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">بورك (لحم / دجاج / جبن) — 8 قطع</div>
+        <div class="card-desc">بورك مقلي مقرمش</div>
+        <div class="card-footer">
+          <div class="card-price">6,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-50',-1)">−</button>
+            <span class="qty-num" id="qty-item-50">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-50',1,6000,'بورك (8 قطع)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-51">
+      <div class="card-img"><div class="img-icon">🥟</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">سمبوسة (لحم / دجاج / جبن) — 8 قطع</div>
+        <div class="card-desc">سمبوسة مقلية مقرمشة</div>
+        <div class="card-footer">
+          <div class="card-price">6,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-51',-1)">−</button>
+            <span class="qty-num" id="qty-item-51">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-51',1,6000,'سمبوسة (8 قطع)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-52">
+      <div class="card-img"><div class="img-icon">🍱</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">مكس (سمبوسة أو بورك أو كبة) — 10 قطع</div>
+        <div class="card-desc">تشكيلة مختلطة لذيذة</div>
+        <div class="card-footer">
+          <div class="card-price">9,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-52',-1)">−</button>
+            <span class="qty-num" id="qty-item-52">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-52',1,9000,'مكس (10 قطع)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-53">
+      <div class="card-img"><div class="img-icon">🥩</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">كباب عروك (نصف كيلو)</div>
+        <div class="card-desc">كباب عراقي أصيل</div>
+        <div class="card-footer">
+          <div class="card-price">13,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-53',-1)">−</button>
+            <span class="qty-num" id="qty-item-53">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-53',1,13000,'كباب عروك (نصف كيلو)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-54">
+      <div class="card-img"><div class="img-icon">🍗</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">سكالوب دجاج (نصف كيلو)</div>
+        <div class="card-desc">سكالوب دجاج طازج</div>
+        <div class="card-footer">
+          <div class="card-price">8,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-54',-1)">−</button>
+            <span class="qty-num" id="qty-item-54">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-54',1,8000,'سكالوب دجاج (نصف كيلو)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-55">
+      <div class="card-img"><div class="img-icon">🍱</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">مكس صينية كبة الجمعات (48 قطعة)</div>
+        <div class="card-desc">صينية كبة مشكلة للجمعات والمناسبات</div>
+        <div class="card-footer">
+          <div class="card-price">45,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-55',-1)">−</button>
+            <span class="qty-num" id="qty-item-55">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-55',1,45000,'مكس صينية كبة الجمعات (48 قطعة)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-56">
+      <div class="card-img"><div class="img-icon">🍟</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">بوكس مقالي بغدادي وسط</div>
+        <div class="card-desc">مقالي بغدادية تقليدية</div>
+        <div class="card-footer">
+          <div class="card-price">9,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-56',-1)">−</button>
+            <span class="qty-num" id="qty-item-56">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-56',1,9000,'بوكس مقالي بغدادي وسط')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-57">
+      <div class="card-img"><div class="img-icon">🍟</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">صينية مقالي بغدادي كبيرة</div>
+        <div class="card-desc">صينية مقالي بغدادية للعائلة</div>
+        <div class="card-footer">
+          <div class="card-price">25,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-57',-1)">−</button>
+            <span class="qty-num" id="qty-item-57">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-57',1,25000,'صينية مقالي بغدادي كبيرة')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6: الكبة المجمدة -->
+<div class="section" id="sec-6">
+  <div class="section-title">🧊 الكبة المجمدة</div>
+  <div class="section-note">أقل عدد للطلب 8 قطع — سعر الـ 8 قطع 6,000 د.ع للأنواع الأساسية</div>
+  <div class="cards">
+    <div class="card" id="item-60">
+      <div class="card-img"><div class="img-icon">🧊</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">كبة حلب (8 قطع)</div>
+        <div class="card-desc">باللحم، بالدجاج، بالأجبان، بالشبنت، أو بالرمان والمكسرات</div>
+        <div class="card-footer">
+          <div class="card-price">6,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-60',-1)">−</button>
+            <span class="qty-num" id="qty-item-60">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-60',1,6000,'كبة حلب (8 قطع)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-61">
+      <div class="card-img"><div class="img-icon">🧊</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">كبة بتيتة چاب (8 قطع)</div>
+        <div class="card-desc">كبة بتيتة مجمدة</div>
+        <div class="card-footer">
+          <div class="card-price">6,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-61',-1)">−</button>
+            <span class="qty-num" id="qty-item-61">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-61',1,6000,'كبة بتيتة چاب (8 قطع)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-62">
+      <div class="card-img"><div class="img-icon">🧊</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">كبة برغل شامية (8 قطع)</div>
+        <div class="card-desc">كبة برغل شامية مجمدة</div>
+        <div class="card-footer">
+          <div class="card-price">7,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-62',-1)">−</button>
+            <span class="qty-num" id="qty-item-62">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-62',1,7000,'كبة برغل شامية (8 قطع)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-63">
+      <div class="card-img"><div class="img-icon">🧊</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">كبة جريش (8 قطع)</div>
+        <div class="card-desc">كبة جريش مجمدة</div>
+        <div class="card-footer">
+          <div class="card-price">8,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-63',-1)">−</button>
+            <span class="qty-num" id="qty-item-63">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-63',1,8000,'كبة جريش (8 قطع)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-64">
+      <div class="card-img"><div class="img-icon">🧊</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">مكس كبب مشكل (32 قطعة)</div>
+        <div class="card-desc">تشكيلة مجمدة متنوعة من الكبب</div>
+        <div class="card-footer">
+          <div class="card-price">25,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-64',-1)">−</button>
+            <span class="qty-num" id="qty-item-64">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-64',1,25000,'مكس كبب مشكل (32 قطعة)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7: أطباق أخرى -->
+<div class="section" id="sec-7">
+  <div class="section-title">🍝 أطباق أخرى</div>
+  <div class="cards">
+    <div class="card" id="item-70">
+      <div class="card-img"><div class="img-icon">🌯</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">رول شاورما دجاج أو مسخن (5 قطع)</div>
+        <div class="card-desc">رول لذيذ بالدجاج أو المسخن</div>
+        <div class="card-footer">
+          <div class="card-price">6,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-70',-1)">−</button>
+            <span class="qty-num" id="qty-item-70">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-70',1,6000,'رول شاورما/مسخن (5 قطع)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-71">
+      <div class="card-img"><div class="img-icon">🌯</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">رول مسخن دجاج (10 قطع)</div>
+        <div class="card-desc">رول مسخن دجاج بالبصل</div>
+        <div class="card-footer">
+          <div class="card-price">12,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-71',-1)">−</button>
+            <span class="qty-num" id="qty-item-71">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-71',1,12000,'رول مسخن دجاج (10 قطع)')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-72">
+      <div class="card-img"><div class="img-icon">🍝</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">معكرونة بالبشاميل (لحم أو دجاج)</div>
+        <div class="card-desc">معكرونة بصوص البشاميل الكريمي</div>
+        <div class="card-footer">
+          <div class="card-price">8,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-72',-1)">−</button>
+            <span class="qty-num" id="qty-item-72">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-72',1,8000,'معكرونة بالبشاميل')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-73">
+      <div class="card-img"><div class="img-icon">🍆</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">ملفوف باذنجان</div>
+        <div class="card-desc">ملفوف باذنجان بيتي شهي</div>
+        <div class="card-footer">
+          <div class="card-price">8,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-73',-1)">−</button>
+            <span class="qty-num" id="qty-item-73">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-73',1,8000,'ملفوف باذنجان')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="item-74">
+      <div class="card-img"><div class="img-icon">🍲</div><div class="img-label">أضف صورة هنا</div></div>
+      <div class="card-body">
+        <div class="card-name">مرق فاصوليا</div>
+        <div class="card-desc">مرق فاصوليا بيتي دافئ</div>
+        <div class="card-footer">
+          <div class="card-price">5,000 <span>د.ع</span></div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('item-74',-1)">−</button>
+            <span class="qty-num" id="qty-item-74">0</span>
+            <button class="qty-btn add-btn" onclick="changeQty('item-74',1,5000,'مرق فاصوليا')">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTICE -->
+<div class="notice">
+  <span class="notice-icon">📌</span>
+  <div>يرجى الحجز قبل يوم من موعد الطلب — عبر رسالة واتساب أو الاتصال على: <strong>07829962799</strong></div>
+</div>
+
+<!-- CART BAR -->
+<div id="cart-bar">
+  <div class="cart-info">
+    <span class="cart-count" id="cart-count-label">0 صنف</span>
+    <span class="cart-total" id="cart-total-label">0 د.ع</span>
+  </div>
+  <button class="btn-order" onclick="openModal()">إتمام الطلب 🛒</button>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <h2>🛒 إتمام الطلب</h2>
+    <div class="order-summary" id="order-summary"></div>
+    <div class="field">
+      <label>الاسم الكريم *</label>
+      <input type="text" id="inp-name" placeholder="اكتب اسمك هنا">
+    </div>
+    <div class="field">
+      <label>رقم الهاتف *</label>
+      <input type="tel" id="inp-phone" placeholder="07xxxxxxxxx">
+    </div>
+    <div class="field">
+      <label>العنوان *</label>
+      <input type="text" id="inp-addr" placeholder="المنطقة، الشارع، رقم الدار">
+    </div>
+    <div class="field">
+      <label>ملاحظات إضافية</label>
+      <textarea id="inp-notes" placeholder="أي تفاصيل إضافية أو تعديلات على الطلب..."></textarea>
+    </div>
+    <button class="btn-send" onclick="sendOrder()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      إرسال الطلب عبر واتساب
+    </button>
+    <button class="btn-cancel" onclick="closeModal()">إلغاء</button>
+  </div>
+</div>
+
+<script>
+  // Cart state
+  const cart = {}; // id -> {name, price, qty}
+
+  function formatNum(n) {
+    return n.toLocaleString('ar-EG');
+  }
+
+  function changeQty(id, delta, price, name) {
+    const qtyEl = document.getElementById('qty-' + id);
+    let current = cart[id] ? cart[id].qty : 0;
+    current = Math.max(0, current + delta);
+
+    if (current === 0) {
+      delete cart[id];
+    } else {
+      cart[id] = { name: name || cart[id]?.name, price: price || cart[id]?.price, qty: current };
+    }
+
+    qtyEl.textContent = current;
+
+    if (delta > 0) {
+      const card = document.getElementById(id);
+      card.classList.remove('added');
+      void card.offsetWidth;
+      card.classList.add('added');
+    }
+
+    updateCartBar();
+  }
+
+  function updateCartBar() {
+    const bar = document.getElementById('cart-bar');
+    let totalQty = 0, totalPrice = 0;
+    for (const k in cart) {
+      totalQty += cart[k].qty;
+      totalPrice += cart[k].qty * cart[k].price;
+    }
+    if (totalQty === 0) {
+      bar.classList.remove('visible');
+    } else {
+      bar.classList.add('visible');
+      document.getElementById('cart-count-label').textContent = totalQty + ' صنف';
+      document.getElementById('cart-total-label').textContent = formatNum(totalPrice) + ' د.ع';
+    }
+  }
+
+  function showSection(idx, btn) {
+    document.querySelectorAll('.section').forEach((s, i) => {
+      s.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+
+  function openModal() {
+    // Build summary
+    const summary = document.getElementById('order-summary');
+    let html = '<h3>ملخص طلبك</h3>';
+    let total = 0;
+    for (const k in cart) {
+      const item = cart[k];
+      const sub = item.qty * item.price;
+      total += sub;
+      html += `<div class="summary-item"><span>${item.name} × ${item.qty}</span><span>${formatNum(sub)} د.ع</span></div>`;
+    }
+    html += `<div class="summary-total"><span>المجموع</span><span>${formatNum(total)} د.ع</span></div>`;
+    summary.innerHTML = html;
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+
+  function sendOrder() {
+    const name = document.getElementById('inp-name').value.trim();
+    const phone = document.getElementById('inp-phone').value.trim();
+    const addr = document.getElementById('inp-addr').value.trim();
+    const notes = document.getElementById('inp-notes').value.trim();
+
+    if (!name || !phone || !addr) {
+      alert('يرجى ملء الاسم ورقم الهاتف والعنوان');
+      return;
+    }
+
+    let msg = '🍽️ *طلب جديد من الخير*\n';
+    msg += '══════════════════\n';
+    let total = 0;
+    for (const k in cart) {
+      const item = cart[k];
+      const sub = item.qty * item.price;
+      total += sub;
+      msg += `• ${item.name} × ${item.qty} = ${formatNum(sub)} د.ع\n`;
+    }
+    msg += '══════════════════\n';
+    msg += `💰 *المجموع: ${formatNum(total)} د.ع*\n\n`;
+    msg += `👤 *الاسم:* ${name}\n`;
+    msg += `📞 *الهاتف:* ${phone}\n`;
+    msg += `📍 *العنوان:* ${addr}\n`;
+    if (notes) msg += `📝 *ملاحظات:* ${notes}\n`;
+
+    const url = 'https://wa.me/9647829962799?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+    closeModal();
+  }
+
+  // Close modal on overlay click
+  document.getElementById('modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+</body>
+</html>
